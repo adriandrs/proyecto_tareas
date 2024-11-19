@@ -55,16 +55,16 @@ Se usan dos efectos principales para gestionar el estado y la persistencia de lo
 Filtrar tareas: Se filtran las tareas según el estatus seleccionado (Pendiente, Hecha, Todas).
 Guardar tareas en localStorage: Cada vez que se actualiza la lista de tareas, se guarda la información en el almacenamiento local del navegador.
 Funciones Principales
-1. Agregar tarea
+1. Agregar tarea:
 Permite agregar nuevas tareas con nombre y descripción.
 
-2. Modificar tarea
+2. Modificar tarea:
 Permite editar una tarea existente, cambiando su nombre y descripción.
 
-3. Eliminar tarea
+3. Eliminar tarea:
 Elimina una tarea de la lista de tareas.
 
-4. Cambiar estatus
+4. Cambiar estatus:
 Permite alternar el estatus de una tarea entre "Pendiente" y "Hecha".
 
 5. Gestionar archivos
@@ -73,17 +73,17 @@ Permite alternar el estatus de una tarea entre "Pendiente" y "Hecha".
 El usuario puede eliminar archivos adjuntos.
 Los archivos se envían cuando la tarea es completada.
 Componentes Principales
-1. App
+1. App:
 Es el componente principal que contiene la lógica de la aplicación y la renderización de los elementos.
 
-2. Tareas
+2. Tareas:
 La lista de tareas se muestra dinámicamente y se actualiza según las acciones del usuario.
 
-3. Filtros
+3. Filtros:
 Los filtros permiten ver las tareas filtradas por estatus (Pendientes, Hechas, Todas).
 
-4. Formulario de Nueva Tarea
+4. Formulario de Nueva Tarea:
 Permite a los usuarios ingresar una nueva tarea con nombre y descripción, y agregarla a la lista de tareas.
 
-5. Gestión de Archivos
+5. Gestión de Archivos:
 Cada tarea puede tener archivos adjuntos. El usuario puede subir o eliminar archivos y marcar la tarea como completada cuando los archivos sean enviados.
