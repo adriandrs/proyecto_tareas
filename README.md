@@ -39,8 +39,9 @@ npm start
 Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicación en tu navegador en http://localhost:3000.
 
 ```
-Explicación del Flujo de Trabajo y Componentes Principales
-Estado y Manejo de Datos
+## Explicación del Flujo de Trabajo y Componentes Principales
+
+### Estado y Manejo de Datos
 useState
 Se utilizan hooks de estado para manejar los siguientes datos:
 
@@ -67,7 +68,8 @@ Elimina una tarea de la lista de tareas.
 Permite alternar el estatus de una tarea entre "Pendiente" y "Hecha".
 
 5. Gestionar archivos
-Permite adjuntar archivos a una tarea.
+
+### Permite adjuntar archivos a una tarea.
 El usuario puede eliminar archivos adjuntos.
 Los archivos se envían cuando la tarea es completada.
 Componentes Principales
