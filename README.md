@@ -39,25 +39,51 @@ npm start
 Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicación en tu navegador en http://localhost:3000.
 
 ```
-Explicación del Flujo de Trabajo y Componentes Principales
+## Explicación del Flujo de Trabajo y Componentes Principales
 
-Estado y Manejo de Datos
-useState: Se utilizan hooks de estado para manejar las tareas (tareas), las tareas filtradas (tareasFiltradas), el filtro de estatus (filtro), y la nueva tarea a agregar (nuevaTarea).
+### Estado y Manejo de Datos
+useState
+Se utilizan hooks de estado para manejar los siguientes datos:
 
-useEffect: Se usan dos efectos principales:
+tareas: Almacena la lista completa de tareas.
+tareasFiltradas: Contiene las tareas filtradas según el estatus seleccionado.
+filtro: Almacena el filtro actual para el estatus de las tareas (Pendientes, Hechas, Todas).
+nuevaTarea: Guarda los datos (nombre y descripción) de la nueva tarea que se va a agregar.
+useEffect
+Se usan dos efectos principales para gestionar el estado y la persistencia de los datos:
 
-Filtrar las tareas según el estatus seleccionado.
-Guardar las tareas en el localStorage cada vez que se actualicen.
+Filtrar tareas: Se filtran las tareas según el estatus seleccionado (Pendiente, Hecha, Todas).
+Guardar tareas en localStorage: Cada vez que se actualiza la lista de tareas, se guarda la información en el almacenamiento local del navegador.
 Funciones Principales
-Agregar tarea: Permite agregar nuevas tareas con nombre y descripción.
-Modificar tarea: Permite editar una tarea existente.
-Eliminar tarea: Elimina una tarea de la lista.
-Cambiar estatus: Permite alternar el estatus de una tarea entre "Pendiente" y "Hecha".
-Gestionar archivos: Permite adjuntar y eliminar archivos de una tarea, y finalmente enviar los archivos si la tarea está completa.
+1. Agregar tarea:
+Permite agregar nuevas tareas con nombre y descripción.
+
+2. Modificar tarea:
+Permite editar una tarea existente, cambiando su nombre y descripción.
+
+3. Eliminar tarea:
+Elimina una tarea de la lista de tareas.
+
+4. Cambiar estatus:
+Permite alternar el estatus de una tarea entre "Pendiente" y "Hecha".
+
+5. Gestionar archivos
+
+### Permite adjuntar archivos a una tarea.
+El usuario puede eliminar archivos adjuntos.
+Los archivos se envían cuando la tarea es completada.
 Componentes Principales
-App: Es el componente principal que contiene la lógica de la aplicación y la renderización de los elementos.
-Tareas: La lista de tareas se muestra dinámicamente y se actualiza según las acciones del usuario.
-Filtros: Los filtros permiten ver las tareas filtradas por estatus (Pendientes, Hechas, Todas).
-Formulario de Nueva Tarea: Permite a los usuarios ingresar una nueva tarea y agregarla a la lista.
-Gestión de Archivos: Cada tarea puede tener archivos adjuntos, y el usuario puede subir o eliminar archivos.
-Contribuciones
+1. App:
+Es el componente principal que contiene la lógica de la aplicación y la renderización de los elementos.
+
+2. Tareas:
+La lista de tareas se muestra dinámicamente y se actualiza según las acciones del usuario.
+
+3. Filtros:
+Los filtros permiten ver las tareas filtradas por estatus (Pendientes, Hechas, Todas).
+
+4. Formulario de Nueva Tarea:
+Permite a los usuarios ingresar una nueva tarea con nombre y descripción, y agregarla a la lista de tareas.
+
+5. Gestión de Archivos:
+Cada tarea puede tener archivos adjuntos. El usuario puede subir o eliminar archivos y marcar la tarea como completada cuando los archivos sean enviados.
