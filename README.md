@@ -45,15 +45,18 @@ Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicació
 useState
 Se utilizan hooks de estado para manejar los siguientes datos:
 
-tareas: Almacena la lista completa de tareas.
-tareasFiltradas: Contiene las tareas filtradas según el estatus seleccionado.
-filtro: Almacena el filtro actual para el estatus de las tareas (Pendientes, Hechas, Todas).
-nuevaTarea: Guarda los datos (nombre y descripción) de la nueva tarea que se va a agregar.
+- tareas: Almacena la lista completa de tareas.
+- tareasFiltradas: Contiene las tareas filtradas según el estatus seleccionado.
+- filtro: Almacena el filtro actual para el estatus de las tareas (Pendientes, Hechas, Todas).
+- nuevaTarea: Guarda los datos (nombre y descripción) de la nueva tarea que se va a agregar.
+
 useEffect
 Se usan dos efectos principales para gestionar el estado y la persistencia de los datos:
 
 Filtrar tareas: Se filtran las tareas según el estatus seleccionado (Pendiente, Hecha, Todas).
 Guardar tareas en localStorage: Cada vez que se actualiza la lista de tareas, se guarda la información en el almacenamiento local del navegador.
+
+
 Funciones Principales
 1. Agregar tarea:
 Permite agregar nuevas tareas con nombre y descripción.
