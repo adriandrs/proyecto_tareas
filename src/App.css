@@ -1,29 +1,130 @@
-* {
-  box-sizing: border-box;
+/* General Styles */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4faff;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+main {
+  width: 90%;
+  max-width: 800px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  color: #1f618d;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.filtros button {
+  background-color: #1f618d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filtros button:hover {
+  background-color: #154360;
+}
+
+/* Contenedor de Tareas */
+.contenedor {
+  margin-top: 10px;
 }
 
 .contenedor-tareas {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  border: 1px black solid;
-  padding: 20px;
-  /* background-color: black; */
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .tarea {
-  border: 1px black solid;
-  padding: 20px;
-  display: grid;
+  background-color: #eaf2f8;
+  border: 1px solid #d4e6f1;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.3s ease;
 }
 
-.estatus {
-  border: 1px black solid;
-  width: fit-content;
-  padding: 10px 5px;
-  transition: all;
-  animation-duration: 1s;
+.tarea:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-.estatus:hover {
-  background-color: aqua;
+
+.nombre {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1f618d;
+}
+
+.descripcion {
+  font-size: 0.9rem;
+  color: #5d6d7e;
+}
+
+/* Buttons */
+button {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-estatus {
+  color: white;
+}
+
+.btn-agregar {
+  background-color: #1f618d;
+  color: white;
+  margin-top: 15px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Inputs */
+input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d4e6f1;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #1f618d;
+  outline: none;
 }
