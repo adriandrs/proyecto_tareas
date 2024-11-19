@@ -175,10 +175,10 @@ function App() {
                   style={{
                     backgroundColor:
                       editandoArchivos === tarea.id
-                        ? "#f8d7da" // Color cuando está editando archivos
+                        ? "#ff6b6b" // Color cuando está editando archivos
                         : tarea.estatus === "Hecha"
-                        ? "#d4edda" // Color cuando está hecha
-                        : "#f8d7da", // Color por defecto (cuando está pendiente)
+                        ? "#6bff8f" // Color cuando está hecha
+                        : "#ff6b6b", // Color por defecto (cuando está pendiente)
                   }}
                 >
                   {editandoArchivos === tarea.id ? "Pendiente" : tarea.estatus}
