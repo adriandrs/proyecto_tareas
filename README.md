@@ -40,6 +40,7 @@ Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicació
 
 ```
 Explicación del Flujo de Trabajo y Componentes Principales
+
 Estado y Manejo de Datos
 useState: Se utilizan hooks de estado para manejar las tareas (tareas), las tareas filtradas (tareasFiltradas), el filtro de estatus (filtro), y la nueva tarea a agregar (nuevaTarea).
 
@@ -60,12 +61,3 @@ Filtros: Los filtros permiten ver las tareas filtradas por estatus (Pendientes, 
 Formulario de Nueva Tarea: Permite a los usuarios ingresar una nueva tarea y agregarla a la lista.
 Gestión de Archivos: Cada tarea puede tener archivos adjuntos, y el usuario puede subir o eliminar archivos.
 Contribuciones
-Si deseas contribuir al proyecto, sigue estos pasos:
-
-Haz un fork de este repositorio.
-Crea una nueva rama (git checkout -b mi-nueva-funcionalidad).
-Realiza tus cambios y haz commit (git commit -am 'Añadir nueva funcionalidad').
-Haz push a tu rama (git push origin mi-nueva-funcionalidad).
-Abre un pull request.
-Licencia
-Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
