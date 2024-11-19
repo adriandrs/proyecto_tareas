@@ -2,13 +2,13 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  // Usamos useState para inicializar las tareas con el localStorage, o con tareas predeterminadas si no hay datos
+  // Se iincializan las tareas con el localStorage
   const [tareas, setTareas] = useState(() => {
     const tareasGuardadas = localStorage.getItem("tareas");
     if (tareasGuardadas) {
-      return JSON.parse(tareasGuardadas); // Si ya hay tareas guardadas, las cargamos
+      return JSON.parse(tareasGuardadas); // Si ya hay tareas guardadas se cargan
     } else {
-      // Si no hay tareas guardadas, cargamos las tareas predeterminadas
+      // Si no hay tareas guardadas, se muestran las tareas predeterminadas
       return [
         {
           id: 1,
@@ -38,24 +38,27 @@ function App() {
     }
   });
 
-  const [tareasFiltradas, setTareasFiltradas] = useState([]);
-  const [filtro, setFiltro] = useState("Todas");
-  const [nuevaTarea, setNuevaTarea] = useState({ nombre: "", descripcion: "" });
-  const [editandoDetalles, setEditandoDetalles] = useState(null);
-  const [editandoArchivos, setEditandoArchivos] = useState(null);
+  const [tareasFiltradas, setTareasFiltradas] = useState([]); // Estado para almacenar las tareas filtradas
+  const [filtro, setFiltro] = useState("Todas"); // Estado para almacenar el filtro seleccionado
+  const [nuevaTarea, setNuevaTarea] = useState({ nombre: "", descripcion: "" }); // Estado para almacenar los datos de la nueva tarea
+  const [editandoDetalles, setEditandoDetalles] = useState(null); // Estado para almacenar el ID de la tarea que se está editando
+  const [editandoArchivos, setEditandoArchivos] = useState(null); // Estado para almacenar el ID de la tarea que se está editando
 
+  // Efecto que aplica el filtro seleccionado a las tareas
   useEffect(() => {
     if (filtro === "Todas") {
-      setTareasFiltradas(tareas);
+      setTareasFiltradas(tareas); // Si el filtro es "Todas", mostramos todas las tareas
     } else {
-      setTareasFiltradas(tareas.filter((tarea) => tarea.estatus === filtro));
+      setTareasFiltradas(tareas.filter((tarea) => tarea.estatus === filtro)); // Si no, solo las tareas que coincidan con el filtro
     }
   }, [filtro, tareas]);
 
+  // Efecto para guardar las tareas en el localStorage cuando cambian
   useEffect(() => {
-    localStorage.setItem("tareas", JSON.stringify(tareas));
+    localStorage.setItem("tareas", JSON.stringify(tareas)); // Guardamos las tareas en el localStorage
   }, [tareas]);
 
+  // Función para agregar una nueva tarea
   const agregarTarea = () => {
     if (nuevaTarea.nombre && nuevaTarea.descripcion) {
       const nueva = {
@@ -63,15 +66,17 @@ function App() {
         nombre: nuevaTarea.nombre,
         descripcion: nuevaTarea.descripcion,
         estatus: "Pendiente",
-        archivos: [], // Inicialización segura de archivos como arreglo vacío
+        archivos: [], // Inicialización de archivos como arreglo vacío
       };
-      setTareas([...tareas, nueva]);
+      setTareas([...tareas, nueva]); // Se agrega la nueva tarea al estado
       setNuevaTarea({ nombre: "", descripcion: "" });
     }
   };
 
+  // Función para modificar una tarea
   const modificarTarea = (id) => {
     if (nuevaTarea.nombre && nuevaTarea.descripcion) {
+      // Se verifica que los campos no estén vacíos
       setTareas(
         tareas.map((tarea) =>
           tarea.id === id
@@ -81,17 +86,19 @@ function App() {
                 descripcion: nuevaTarea.descripcion,
               }
             : tarea
-        )
+        ) // Se reemplaza la tarea con los nuevos datos
       );
-      setEditandoDetalles(null);
-      setNuevaTarea({ nombre: "", descripcion: "" });
+      setEditandoDetalles(null); // Se quita el modo de edición
+      setNuevaTarea({ nombre: "", descripcion: "" }); // Se limpian los campos
     }
   };
 
+  // Función para eliminar una tarea
   const eliminarTarea = (id) => {
-    setTareas(tareas.filter((tarea) => tarea.id !== id));
+    setTareas(tareas.filter((tarea) => tarea.id !== id)); // Se filtran las tareas para quitar la tarea con el ID especificado
   };
 
+  // Función para agregar un archivo a una tarea
   const agregarArchivo = (id, archivo) => {
     setTareas(
       tareas.map((tarea) =>
@@ -99,9 +106,10 @@ function App() {
           ? { ...tarea, archivos: [...tarea.archivos, archivo] }
           : tarea
       )
-    );
+    ); // Se agrega el archivo a la tarea especificada
   };
 
+  // Función para eliminar un archivo de una tarea
   const eliminarArchivo = (id, archivoIndex) => {
     setTareas(
       tareas.map((tarea) =>
@@ -114,18 +122,20 @@ function App() {
             }
           : tarea
       )
-    );
+    ); // Se filtran los archivos para quitar el archivo con el ID especificado
   };
 
+  // Función para enviar los archivos de una tarea
   const enviarArchivos = (id) => {
     setTareas(
       tareas.map((tarea) =>
         tarea.id === id ? { ...tarea, estatus: "Hecha" } : tarea
       )
-    );
-    setEditandoArchivos(null);
+    ); // Se cambia el estatus de la tarea a "Hecha"
+    setEditandoArchivos(null); // Se quita el modo de edición
   };
 
+  // Función para cambiar el estatus de una tarea
   const cambiarEstatus = (id) => {
     setTareas(
       tareas.map((tarea) =>
@@ -136,7 +146,7 @@ function App() {
             }
           : tarea
       )
-    );
+    ); // Se cambia el estatus de la tarea
   };
 
   return (
@@ -181,21 +191,16 @@ function App() {
                       {(Array.isArray(tarea.archivos)
                         ? tarea.archivos
                         : []
-                      ).map(
-                        (
-                          archivo,
-                          index // Comprobamos que sea un arreglo
-                        ) => (
-                          <li key={index}>
-                            {archivo.name}{" "}
-                            <button
-                              onClick={() => eliminarArchivo(tarea.id, index)}
-                            >
-                              Eliminar
-                            </button>
-                          </li>
-                        )
-                      )}
+                      ).map((archivo, index) => (
+                        <li key={index}>
+                          {archivo.name}{" "}
+                          <button
+                            onClick={() => eliminarArchivo(tarea.id, index)}
+                          >
+                            Eliminar
+                          </button>
+                        </li>
+                      ))}
                     </ul>
                     <input
                       type="file"
