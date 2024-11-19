@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Gestor de Tareas  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción  
 
-## Available Scripts
+El **Gestor de Tareas** es una aplicación web construida con **React** que permite gestionar tareas de forma sencilla. Puedes agregar, editar, eliminar, y marcar tareas como completadas. Además, puedes adjuntar archivos a las tareas y gestionar su estado (Pendiente o Hecha). Los datos se almacenan de manera persistente en el navegador utilizando **localStorage**, lo que permite que las tareas se mantengan guardadas incluso al recargar la página.  
 
-In the project directory, you can run:
+## Características  
 
-### `npm start`
+- **Gestión de tareas**: Crear tareas con nombre y descripción.  
+- **Filtrado de tareas**: Puedes filtrar las tareas por estatus (Pendiente o Hecha).  
+- **Subir archivos**: Adjuntar archivos a las tareas.  
+- **Almacenamiento persistente**: Las tareas se guardan en el almacenamiento local del navegador.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Instrucciones de Instalación y Ejecución  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Requisitos Previos  
 
-### `npm test`
+Asegúrate de tener **Node.js** y **npm** instalados en tu máquina. Puedes comprobar esto ejecutando los siguientes comandos en la terminal:  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+``` 
+node -v  
+npm -v  
+Si no los tienes instalados, puedes descargarlos desde nodejs.org.
 
-### `npm run build`
+Instalación
+Clona el repositorio en tu máquina local:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+git clone https://github.com/tu-usuario/gestor-de-tareas.git  
+cd gestor-de-tareas  
+Instala las dependencias del proyecto:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ejecución
+Para ejecutar la aplicación en tu entorno local, usa el siguiente comando:
 
-### `npm run eject`
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicación en tu navegador en http://localhost:3000.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+Explicación del Flujo de Trabajo y Componentes Principales
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Estado y Manejo de Datos
+useState: Se utilizan hooks de estado para manejar las tareas (tareas), las tareas filtradas (tareasFiltradas), el filtro de estatus (filtro), y la nueva tarea a agregar (nuevaTarea).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+useEffect: Se usan dos efectos principales:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Filtrar las tareas según el estatus seleccionado.
+Guardar las tareas en el localStorage cada vez que se actualicen.
+Funciones Principales
+Agregar tarea: Permite agregar nuevas tareas con nombre y descripción.
+Modificar tarea: Permite editar una tarea existente.
+Eliminar tarea: Elimina una tarea de la lista.
+Cambiar estatus: Permite alternar el estatus de una tarea entre "Pendiente" y "Hecha".
+Gestionar archivos: Permite adjuntar y eliminar archivos de una tarea, y finalmente enviar los archivos si la tarea está completa.
+Componentes Principales
+App: Es el componente principal que contiene la lógica de la aplicación y la renderización de los elementos.
+Tareas: La lista de tareas se muestra dinámicamente y se actualiza según las acciones del usuario.
+Filtros: Los filtros permiten ver las tareas filtradas por estatus (Pendientes, Hechas, Todas).
+Formulario de Nueva Tarea: Permite a los usuarios ingresar una nueva tarea y agregarla a la lista.
+Gestión de Archivos: Cada tarea puede tener archivos adjuntos, y el usuario puede subir o eliminar archivos.
+Contribuciones
