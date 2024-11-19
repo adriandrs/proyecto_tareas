@@ -1,12 +1,14 @@
-import "./App.css"; // Importamos el archivo de estilos CSS para la app
-import { useState, useEffect } from "react"; // Importamos los hooks de React: useState y useEffect
+import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
-  // useState para manejar las tareas, las cuales se obtienen del localStorage si es que existen
+  // Usamos useState para inicializar las tareas con el localStorage, o con tareas predeterminadas si no hay datos
   const [tareas, setTareas] = useState(() => {
-    const tareasGuardadas = localStorage.getItem("tareas"); // Verificamos si ya existen tareas guardadas
+    const tareasGuardadas = localStorage.getItem("tareas");
     if (tareasGuardadas) {
-      // Si ya existen, las usamos; de lo contrario, asignamos tareas predeterminadas (ejemplo de programación)
+      return JSON.parse(tareasGuardadas); // Si ya hay tareas guardadas, las cargamos
+    } else {
+      // Si no hay tareas guardadas, cargamos las tareas predeterminadas
       return [
         {
           id: 1,
@@ -33,94 +35,73 @@ function App() {
           archivos: [],
         },
       ];
-    } else {
-      // Si no hay tareas guardadas, devolvemos un array vacío
-      return [];
     }
   });
 
-  // useState para manejar las tareas filtradas según el estatus
   const [tareasFiltradas, setTareasFiltradas] = useState([]);
-
-  // useState para manejar el filtro de tareas: 'Todas', 'Pendiente' o 'Hecha'
   const [filtro, setFiltro] = useState("Todas");
-
-  // useState para manejar la tarea nueva que vamos a agregar
   const [nuevaTarea, setNuevaTarea] = useState({ nombre: "", descripcion: "" });
-
-  // Estado para saber si estamos editando los detalles de una tarea
   const [editandoDetalles, setEditandoDetalles] = useState(null);
-
-  // Estado para saber si estamos editando los archivos adjuntos de una tarea
   const [editandoArchivos, setEditandoArchivos] = useState(null);
 
-  // useEffect para filtrar las tareas según el estatus seleccionado
   useEffect(() => {
     if (filtro === "Todas") {
-      setTareasFiltradas(tareas); // Si el filtro es "Todas", mostramos todas las tareas
+      setTareasFiltradas(tareas);
     } else {
-      setTareasFiltradas(tareas.filter((tarea) => tarea.estatus === filtro)); // Filtramos las tareas por el estatus
+      setTareasFiltradas(tareas.filter((tarea) => tarea.estatus === filtro));
     }
   }, [filtro, tareas]);
 
-  // useEffect para guardar las tareas en el localStorage cada vez que cambian
   useEffect(() => {
     localStorage.setItem("tareas", JSON.stringify(tareas));
   }, [tareas]);
 
-  // Función para agregar una nueva tarea
   const agregarTarea = () => {
     if (nuevaTarea.nombre && nuevaTarea.descripcion) {
       const nueva = {
-        id: Date.now(), // Usamos el timestamp como ID único
+        id: Date.now(),
         nombre: nuevaTarea.nombre,
         descripcion: nuevaTarea.descripcion,
-        estatus: "Pendiente", // Por defecto, la tarea está pendiente
-        archivos: [], // Inicialmente no tiene archivos adjuntos
+        estatus: "Pendiente",
+        archivos: [], // Inicialización segura de archivos como arreglo vacío
       };
-      setTareas([...tareas, nueva]); // Agregamos la nueva tarea al estado de tareas
-      setNuevaTarea({ nombre: "", descripcion: "" }); // Limpiamos los campos del formulario
+      setTareas([...tareas, nueva]);
+      setNuevaTarea({ nombre: "", descripcion: "" });
     }
   };
 
-  // Función para modificar una tarea existente
   const modificarTarea = (id) => {
     if (nuevaTarea.nombre && nuevaTarea.descripcion) {
       setTareas(
         tareas.map((tarea) =>
           tarea.id === id
             ? {
-                ...tarea, // Mantenemos el resto de las propiedades de la tarea
+                ...tarea,
                 nombre: nuevaTarea.nombre,
                 descripcion: nuevaTarea.descripcion,
               }
             : tarea
         )
       );
-      setEditandoDetalles(null); // Salimos del modo de edición
-      setNuevaTarea({ nombre: "", descripcion: "" }); // Limpiamos los campos
+      setEditandoDetalles(null);
+      setNuevaTarea({ nombre: "", descripcion: "" });
     }
   };
 
-  // Función para eliminar una tarea
   const eliminarTarea = (id) => {
-    if (window.confirm("¿Seguro que quieres eliminar esta tarea?")) {
-      setTareas(tareas.filter((tarea) => tarea.id !== id)); // Eliminamos la tarea del estado
-    }
+    setTareas(tareas.filter((tarea) => tarea.id !== id));
   };
 
-  // Función para agregar archivos a una tarea
   const agregarArchivo = (id, archivo) => {
     setTareas(
       tareas.map((tarea) =>
         tarea.id === id
-          ? { ...tarea, archivos: [...tarea.archivos, archivo] } // Añadimos el archivo a la tarea
+          ? { ...tarea, archivos: [...tarea.archivos, archivo] }
           : tarea
       )
     );
   };
 
-  // Función para eliminar un archivo de una tarea
   const eliminarArchivo = (id, archivoIndex) => {
     setTareas(
       tareas.map((tarea) =>
@@ -128,7 +109,7 @@ function App() {
           ? {
               ...tarea,
               archivos: tarea.archivos.filter(
-                (_, index) => index !== archivoIndex // Eliminamos el archivo por índice
+                (_, index) => index !== archivoIndex
               ),
             }
           : tarea
@@ -136,24 +117,22 @@ function App() {
     );
   };
 
-  // Función para enviar los archivos de una tarea
   const enviarArchivos = (id) => {
     setTareas(
-      tareas.map(
-        (tarea) => (tarea.id === id ? { ...tarea, estatus: "Hecha" } : tarea) // Cambiamos el estatus a "Hecha"
+      tareas.map((tarea) =>
+        tarea.id === id ? { ...tarea, estatus: "Hecha" } : tarea
       )
     );
-    setEditandoArchivos(null); // Salimos del modo de edición de archivos
+    setEditandoArchivos(null);
   };
 
-  // Función para cambiar el estatus de una tarea (de Pendiente a Hecha o viceversa)
   const cambiarEstatus = (id) => {
     setTareas(
       tareas.map((tarea) =>
         tarea.id === id
           ? {
               ...tarea,
-              estatus: tarea.estatus === "Hecha" ? "Pendiente" : "Hecha", // Alternamos entre los estatus
+              estatus: tarea.estatus === "Hecha" ? "Pendiente" : "Hecha",
             }
           : tarea
       )
@@ -164,7 +143,8 @@ function App() {
     <main>
       <header>
         <h1 className="header">Gestor de Tareas</h1>
-      </header>
+        <p>Sistemas de gestion de tareas.</p>
+      </header>{" "}
       <section className="app">
         <div className="filtros">
           <h5>Filtros</h5>
@@ -185,35 +165,37 @@ function App() {
                   style={{
                     backgroundColor:
                       editandoArchivos === tarea.id
-                        ? "#f8d7da" // Si está editando archivos, color diferente
+                        ? "#f8d7da" // Color cuando está editando archivos
                         : tarea.estatus === "Hecha"
-                        ? "#d4edda" // Si la tarea está hecha, color verde
-                        : "#f8d7da", // Si está pendiente, color rojo
+                        ? "#d4edda" // Color cuando está hecha
+                        : "#f8d7da", // Color por defecto (cuando está pendiente)
                   }}
-                  disabled={
-                    tarea.estatus === "Hecha" && tarea.archivos.length > 0
-                  }
                 >
                   {editandoArchivos === tarea.id ? "Pendiente" : tarea.estatus}
                 </button>
 
-                {/* Sección para archivos */}
+                {/* Archivos */}
                 {editandoArchivos === tarea.id ? (
                   <>
                     <ul>
                       {(Array.isArray(tarea.archivos)
                         ? tarea.archivos
                         : []
-                      ).map((archivo, index) => (
-                        <li key={index}>
-                          {archivo.name}{" "}
-                          <button
-                            onClick={() => eliminarArchivo(tarea.id, index)}
-                          >
-                            Eliminar
-                          </button>
-                        </li>
-                      ))}
+                      ).map(
+                        (
+                          archivo,
+                          index // Comprobamos que sea un arreglo
+                        ) => (
+                          <li key={index}>
+                            {archivo.name}{" "}
+                            <button
+                              onClick={() => eliminarArchivo(tarea.id, index)}
+                            >
+                              Eliminar
+                            </button>
+                          </li>
+                        )
+                      )}
                     </ul>
                     <input
                       type="file"
@@ -231,12 +213,81 @@ function App() {
                   </>
                 ) : (
                   <button onClick={() => setEditandoArchivos(tarea.id)}>
-                    Subir Archivos
+                    Editar envio
                   </button>
                 )}
+
+                {/* Botón para editar detalles */}
+                {editandoDetalles === tarea.id ? (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="Nombre"
+                      value={nuevaTarea.nombre}
+                      onChange={(e) =>
+                        setNuevaTarea({ ...nuevaTarea, nombre: e.target.value })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="Descripción"
+                      value={nuevaTarea.descripcion}
+                      onChange={(e) =>
+                        setNuevaTarea({
+                          ...nuevaTarea,
+                          descripcion: e.target.value,
+                        })
+                      }
+                    />
+                    <button onClick={() => modificarTarea(tarea.id)}>
+                      Guardar
+                    </button>
+                    <button onClick={() => setEditandoDetalles(null)}>
+                      Cancelar
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setEditandoDetalles(tarea.id);
+                      setNuevaTarea({
+                        nombre: tarea.nombre,
+                        descripcion: tarea.descripcion,
+                      });
+                    }}
+                  >
+                    Editar Detalles
+                  </button>
+                )}
+
+                <button onClick={() => eliminarTarea(tarea.id)}>
+                  Eliminar
+                </button>
               </li>
             ))}
           </ul>
+          <div>
+            <h2>Agregar Nueva Tarea</h2>
+            <input
+              type="text"
+              placeholder="Nombre"
+              value={nuevaTarea.nombre}
+              onChange={(e) =>
+                setNuevaTarea({ ...nuevaTarea, nombre: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Descripción"
+              value={nuevaTarea.descripcion}
+              onChange={(e) =>
+                setNuevaTarea({ ...nuevaTarea, descripcion: e.target.value })
+              }
+            />
+            <button className="btn-agregar" onClick={agregarTarea}>
+              Agregar Tarea
+            </button>
+          </div>
         </div>
       </section>
     </main>
