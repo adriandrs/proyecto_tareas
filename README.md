@@ -17,7 +17,7 @@ El **Gestor de Tareas** es una aplicación web construida con **React** que perm
 
 Asegúrate de tener **Node.js** y **npm** instalados en tu máquina. Puedes comprobar esto ejecutando los siguientes comandos en la terminal:  
 
-```bash  
+``` 
 node -v  
 npm -v  
 Si no los tienes instalados, puedes descargarlos desde nodejs.org.
@@ -34,9 +34,11 @@ npm install
 Ejecución
 Para ejecutar la aplicación en tu entorno local, usa el siguiente comando:
 
-npm start  
+npm start
+
 Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicación en tu navegador en http://localhost:3000.
 
+```
 Explicación del Flujo de Trabajo y Componentes Principales
 Estado y Manejo de Datos
 useState: Se utilizan hooks de estado para manejar las tareas (tareas), las tareas filtradas (tareasFiltradas), el filtro de estatus (filtro), y la nueva tarea a agregar (nuevaTarea).
