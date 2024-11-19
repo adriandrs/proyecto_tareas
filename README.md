@@ -25,20 +25,15 @@ Si no los tienes instalados, puedes descargarlos desde nodejs.org.
 Instalación
 Clona el repositorio en tu máquina local:
 
-bash
-Copy code
 git clone https://github.com/tu-usuario/gestor-de-tareas.git  
 cd gestor-de-tareas  
 Instala las dependencias del proyecto:
 
-bash
-Copy code
-npm install  
+npm install
+
 Ejecución
 Para ejecutar la aplicación en tu entorno local, usa el siguiente comando:
 
-bash
-Copy code
 npm start  
 Esto iniciará la aplicación en modo desarrollo. Puedes acceder a la aplicación en tu navegador en http://localhost:3000.
 
